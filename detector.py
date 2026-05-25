@@ -39,9 +39,9 @@ def detect_lego_pieces(image_np):
 
     # Render the results on the image
     res = results[0]
-    processed_image_bgr = res.plot() # Ultralytics function to draw bounding boxes, returns BGR
-    # Convert BGR to RGB for Streamlit displaying
-    processed_image = cv2.cvtColor(processed_image_bgr, cv2.COLOR_BGR2RGB)
+    # Ultralytics res.plot() returns the image in the same color format it was given
+    # Since we passed an RGB array from PIL, it returns an RGB array. No need to convert.
+    processed_image = res.plot()
 
     # Process the bounding boxes to create our simulated Lego list
     for box in res.boxes:
