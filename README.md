@@ -34,7 +34,12 @@ A browser window will open automatically at `http://localhost:8501`.
 This application is built to be easily upgraded. The generic YOLOv8 model (`yolov8n.pt`) doesn't know specific Lego pieces. To make it detect actual part numbers, you need to train a custom model:
 
 1. **Gather Data:** Take pictures of your Lego pieces on a clean background.
-2. **Annotate:** Use a tool like [Roboflow](https://roboflow.com/) or CVAT to draw boxes around the pieces and label them with their part number (e.g., `3001-red`).
+   * **Pro-tip:** Instead of taking hundreds of pictures manually, you can take a 30-second video walking around your Lego pieces. Then, use the included utility script to extract the frames automatically:
+     ```bash
+     python extract_frames.py my_lego_video.mp4 --interval 10
+     ```
+     This will pull every 10th frame and save it as a high-quality image in the `dataset_frames` folder, ready for annotation!
+2. **Annotate:** Use a tool like [Roboflow](https://roboflow.com/) or CVAT to upload your images, draw boxes around the pieces, and label them with their part number (e.g., `3001`).
 3. **Train:** Export the dataset in YOLOv8 format and use the Ultralytics library to train your custom model:
    ```python
    from ultralytics import YOLO
